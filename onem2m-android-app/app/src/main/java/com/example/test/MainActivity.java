@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     //
     TextView logout;
     EditText cseUri;
-    Button Start, Stop;
+    Button Start, Stop,temperature_value,humidity_value,turbidity_value,pH_value;
     Boolean isStopThread = false;
 
     //
@@ -42,13 +42,18 @@ public class MainActivity extends AppCompatActivity {
         //Init control
         Start = findViewById(R.id.start);
         Stop = findViewById(R.id.stop);
-        logout = findViewById(R.id.logout);
+//        logout = findViewById(R.id.logout);
+        temperature_value = findViewById(R.id.button_temperature);
+        humidity_value = findViewById(R.id.button_humidity);
+        turbidity_value = findViewById(R.id.button_turbidity);
+        pH_value = findViewById(R.id.button_pH);
+        //
         cseUri = findViewById(R.id.ipadress_text);
         cseUri.setText("172.20.10.3");
     }
 
     public void StartOnClick(View view) {
-        clearText(logout);
+//        clearText(logout);
         try {
             startConnect();
             isStopThread = false;
@@ -74,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
                     hashMap.put(2, "humidity");
                     hashMap.put(3, "turbidity");
                     hashMap.put(4, "ph");
+
+                    Map<Integer, Button> buttonTextMap = new HashMap<>();
+                    buttonTextMap.put(1, temperature_value);
+                    buttonTextMap.put(2, humidity_value);
+                    buttonTextMap.put(3, turbidity_value);
+                    buttonTextMap.put(4, pH_value);
                     //
                     URL url = null;
                     try {
@@ -95,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
                         conn.connect();
                         Thread.sleep(1000);
                         String con = getResponseBodyCon(resolveInputStream(conn));
-                        addText(logout, hashMap.get(n) + ": " + con);
+//                        addText(logout, hashMap.get(n) + ": " + con);
+                        loadButtonText(buttonTextMap.get(n),con);
                         System.out.println(con);
                     } catch (IOException | JSONException | InterruptedException e) {
                         e.printStackTrace();
@@ -103,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     n++;
                     if (n > 4) {
                         n = 1;
-                        addText(logout, "----------");
+//                        addText(logout, "----------");
                     }
                     if (isStopThread) {
                         break;
@@ -153,6 +165,15 @@ public class MainActivity extends AppCompatActivity {
         }
         responseBody = baos.toString();
         return responseBody;
+    }
+
+    public void loadButtonText(Button button, String s) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                button.setText(s);
+            }
+        });
     }
 
 //    private void Tip(String text) {

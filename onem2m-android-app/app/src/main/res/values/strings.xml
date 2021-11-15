@@ -7,4 +7,16 @@
     <string name="start_listen_button">Start</string>
     <string name="stop_listen_button">Stop</string>
     <string name="versionText">version: 0.0.1 beta</string>
+    <string name="temperature_icon">temperature_icon</string>
+    <string name="humidity_icon">humidity_icon</string>
+    <string name="turbidity_icon">turbidity_icon</string>
+    <string name="pH_icon">pH_icon</string>
+    <string name="temperature_value">temperature_value</string>
+    <string name="humidity_value">humidity_value</string>
+    <string name="turbidity_value">turbidity_value</string>
+    <string name="pH_value">pH_value</string>
+    <string name="text_temputerature">-Temperature-</string>
+    <string name="text_humidity">-Humidity-</string>
+    <string name="text_turbidity">Turbidity</string>
+    <string name="text_ph">-pH-</string>
 </resources>
